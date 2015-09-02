@@ -1,66 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 142, in script call
+  File "game/script.rpy", line 195, in script call
     call new_round
-  File "game/script.rpy", line 161, in script call
+  File "game/script.rpy", line 210, in script
     call player_turn
-  File "game/script.rpy", line 169, in script
-    $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
-  File "game/script.rpy", line 169, in <module>
-    $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
-  File "renpy/common/00action_data.rpy", line 50, in get_selected
-    return getattr(self.object, self.field) == self.value
-AttributeError: 'StoreModule' object has no attribute 'hand'
+Exception: Possible infinite loop.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 142, in script call
+  File "game/script.rpy", line 195, in script call
     call new_round
-  File "game/script.rpy", line 161, in script call
+  File "game/script.rpy", line 210, in script
     call player_turn
-  File "game/script.rpy", line 169, in script
-    $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ast.py", line 785, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\python.py", line 1448, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "game/script.rpy", line 169, in <module>
-    $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ui.py", line 277, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2276, in interact
-    repeat, rv = self.interact_core(preloads=preloads, **kwargs)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2527, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\screen.py", line 386, in visit_all
-    self.child.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
-    d.visit_all(callback)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 343, in visit_all
-    callback(self)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2527, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 691, in per_interact
-    if is_selected(self.action):
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 335, in is_selected
-    return clicked.get_selected()
-  File "renpy/common/00action_data.rpy", line 50, in get_selected
-    return getattr(self.object, self.field) == self.value
-AttributeError: 'StoreModule' object has no attribute 'hand'
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\execution.py", line 52, in check_infinite_loop
+    raise Exception("Possible infinite loop.")
+Exception: Possible infinite loop.
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.4.467

@@ -2,8 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 88: keyword argument u'action' appears more than once in a textbutton statement.
-    action Show(play_cards)
-          ^
+File "game/script.rpy", line 209: reached end of line when expecting ':'.
+    if 
+       ^
 
 Ren'Py Version: Ren'Py 6.99.4.467

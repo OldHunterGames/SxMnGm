@@ -38,11 +38,11 @@ screen play_cards():
         hover im.MatrixColor(im.Scale("images/female/01.jpg", 200, 200), im.matrix.brightness(0.05))
         action Jump("session_end")
 
-    imagebutton: # AI AVATAR
+    imagebutton: # AI IMPLEMENT
         align (0.95, 0.5)
         idle im.Scale("images/implement/boobs.jpg", 200, 200)
         hover im.MatrixColor(im.Scale("images/implement/boobs.jpg", 200, 200), im.matrix.brightness(0.05))
-        action Jump("session_end")
+        action Return(ai)
 
     frame: # PLAYER NAME
         xysize (200, 30) # A size of this frame in pixels.
@@ -54,9 +54,9 @@ screen play_cards():
         align (0.05, 0.1)
         idle im.Scale("images/male/01.jpg", 200, 200)
         hover im.MatrixColor(im.Scale("images/male/01.jpg", 200, 200), im.matrix.brightness(0.05))
-        action Jump("session_end")
+        action Show("show_role", player)
 
-    imagebutton: # PLAYER AVATAR
+    imagebutton: # PLAYER IMPLEMENT
         align (0.05, 0.5)
         idle im.Scale("images/implement/dick.jpg", 200, 200)
         hover im.MatrixColor(im.Scale("images/implement/dick.jpg", 200, 200), im.matrix.brightness(0.05))
@@ -80,27 +80,80 @@ screen play_cards():
         hbox: # Same thing as VBox, just horizontal positioning.
             xysize (600, 200)
             box_wrap True
-        vbox:
-            textbutton "Your hand":
-                action SetVariable(table_status, "hand")
-            textbutton "Your deck":
-                action SetVariable(table_status, "yes")
-            textbutton "Your discard":
-                action Return(["pass"])                
-        vbox:
-            textbutton "PASS":
-                action Return(["pass"])
-
+            xfill True
+            vbox:
+                xalign 0.1 
+                text "[player.name]\n"                
+                textbutton "Hand":
+                    action SetVariable("table_status", "your_hand")
+                textbutton "Deck":
+                    action SetVariable("table_status", "your_deck")
+                textbutton "Discard":
+                    action SetVariable("table_status", "your_discard")
+            vbox:
+                xalign 0.5       
+                textbutton "Table":
+                    action SetVariable("table_status", "played_on_table")
+                textbutton "PASS":
+                    action Return(["pass"])
+            vbox:   
+                xalign 0.9          
+                text "[ai.name]\n"
+                textbutton "Hand":
+                    action SetVariable("table_status", "ai_hand")
+                textbutton "Deck":
+                    action SetVariable("table_status", "ai_deck")
+                textbutton "Discard":
+                    action SetVariable("table_status", "ai_discard")
+                
     frame: # TABLE MENU
         xysize (600, 420)
         align (0.5, 0.1)
         has vbox spacing 10
-        if table_status == "hand":
-            for card in player.hand:
-                textbutton card.name:
-                    action Return(["play card", card, ai]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
+        if table_status == "your_hand":
+            text "YOUR AVIABLE ACTIONS\n"
+            hbox:
+                box_wrap True
+                for card in player.hand:
+                    textbutton card.name:
+                        action Return(["play card", card, ai]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
+        elif table_status == "your_deck":
+            text "ACTIONS IN YOUR DECK\n"
+            hbox:
+                box_wrap True
+                for card in player.deck:
+                    text "[card.name], "
+        elif table_status == "your_discard":
+            text "YOUR USED ACTIONS\n"
+            hbox:
+                box_wrap True
+                for card in player.discard_pile:
+                    text "[card.name], "
+        elif table_status == "played_on_table":
+            text "ACTIONS MADE THIS ROUND\n"
+            hbox:
+                box_wrap True
+                text "[player.name]\n"
+                for card in player.table:
+                    text "[card.name], "
+                text "\n[ai.name]\n"
+                for card in player.table:
+                    text "[card.name], "    
         else:
-            text "yay!"            
+            text "ERROR. WRONG table_status"            
+
+screen show_role(whois):
+    frame: 
+        align (0.5, 0.5)                 
+        has vbox spacing 10
+        text "[whois.name]"
+        hbox:
+            align (0.5, 0.9)
+            box_wrap True
+            textbutton "Play!":
+                action Return("confirm")
+            textbutton "Back":
+                action Return("reject")          
             
 screen show_card():
     frame: 
@@ -144,24 +197,30 @@ label start:
     
 label new_round:    
     show screen play_cards
-    while not ai.passed and not player.passed:
+    while True:
         $ active_player = players[index]
         $ index = index = (index+1) % len(players) # This is a cool python trick for working with lists :) Turn will go to the next player, we do not have to worry about a thing.
-        
-        if active_player.controller == "ai":
-            if active_player.hand and not active_player.passed:
-                # We let ui make a move.
-                # HERE: We will make a choice between the opponents when we have more than one, just one extra line of code.
-                $ card = random.choice(active_player.hand)
-                $ active_player.play_card(card, player)
-                "[active_player.name] action is [card.name]. [card.description]"
-                if player.passed:
-                    $ active_player.passed = True
+        if active_player.passed:
+            $ active_player = players[index]
+        if ai.passed and not player.passed:
+            jump round_end
+        elif active_player.controller == "ai":     
+            call ai_turn
         else:
             call player_turn
-    call round_end
     return
 
+label ai_turn:
+        if active_player.hand and not active_player.passed:
+            # We let ui make a move.
+            # HERE: We will make a choice between the opponents when we have more than one, just one extra line of code.
+            $ card = random.choice(active_player.hand)
+            $ active_player.play_card(card, player)
+            "[active_player.name] action is [card.name]. [card.description]"
+            if player.passed:
+                $ active_player.passed = True    
+        return
+    
 label player_turn:
     hide screen show_card
     show screen play_cards
