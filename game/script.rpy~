@@ -1,0 +1,115 @@
+﻿init python:
+    import random
+    from random import shuffle
+    from python.Card import *
+    from python.Player import *
+
+
+    # Our Hotel project already has a lot of imports*
+    
+screen play_cards():
+    frame: 
+        xysize (200, 300) # A size of this frame in pixels.
+        align (0.1, 0.1) # Positioning on the screen.
+        
+        # Frame by default takes fixed as it's child. Fixed layout means everything will be positioned as programmer wishes it, no forced order or anything like that. We are not going to change that.
+        # We however are going to change that default to a vbox. VBox plainly means that everything in the container will be placed vertically, automatically by Ren'Py! like so:
+        has vbox spacing 10 # spacing tells vbox to put 10 pixels between it's children
+        
+        text ai.name # Text statement adds text to the screen. This will be on top of the Vbox inside of a frame.
+        text "Pleasure: {}".format(ai.pleasure) 
+        text "Pain: {}".format(ai.pain) 
+        text "Shame: {}".format(ai.shame)         
+        text "{} cards".format(len(ai.hand)) # Second text, it will be placed vertically 10 pixels apart from the first one.
+        
+    frame: 
+        xysize (200, 300) # A size of this frame in pixels.
+        align (0.9, 0.1) # Positioning on the screen.       
+        has vbox spacing 10
+        text player.name 
+        text "Pleasure: {}".format(player.pleasure) 
+        text "Pain: {}".format(player.pain) 
+        text "Shame: {}".format(player.shame)     
+        
+    # Next is the player, there is only one...
+    frame:
+        xysize (600, 200)
+        align (0.5, 0.9)
+        has vbox spacing 10
+        
+        # Player has direct control over his/her cards, so we interate over the deck and create buttons on the screen:
+        hbox: # Same thing as VBox, just horizontal positioning.
+            xysize (600, 200)
+            box_wrap True
+            for card in player.hand:
+                textbutton card.name:
+                    action Return([card, ai]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
+        
+            
+# The game starts here.
+label start:
+    call load_resources
+    "Let's match begin!"
+    show screen play_cards
+    $ index = 0
+    
+    while ai.hand or player.hand:
+        $ active_player = players[index]
+        "[active_player.name]'s Turn!'"
+        $ index = index = (index+1) % len(players) # This is a cool python trick for working with lists :) Turn will go to the next player, we do not have to worry about a thing.
+        
+        if active_player.controller == "ai":
+            # We let ui make a move.
+            # HERE: We will make a choice between the opponents when we have more than one, just one extra line of code.
+            $ card = random.choice(active_player.hand)
+            $ active_player.play_card(card, player)
+            "[active_player.name] uses [card.name] on [player.name]!"
+        else:
+            $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
+            # This obviosuly assumes that a real player is to make a move and this is the part that is going to wait for the player to make one!
+            # When player clicks on a card on the screen, we get a list of a card and target in the return.
+            # When we will allow more than one target, target would have to be chosen on screen just like the card... (with a button)
+            
+            # p is now already a player, we would not get this far if it was an ai!
+            $ card, target = result[0], result[1] # We get the card and opponent from the list returned by the screen!
+            $ active_player.play_card(card, target)
+            "[active_player.name] uses [card.name] on [target.name]!"
+            
+    $ temp = "{} pleasure: {}\n{} pleasure: {}".format(player.name, player.pleasure, ai.name, ai.pleasure)
+    "[temp]"
+    return
+    
+    
+label load_resources:
+    
+    python:
+        player = Player("Male", "player")
+        ai = Player("Female AI", "ai")
+        deck = []
+        deck.append(Card("Kiss"))
+        deck.append(Card("Kiss"))
+        deck.append(Card("Kiss"))
+        deck.append(Card("Kiss"))
+        deck.append(Card("Pet"))
+        deck.append(Card("Pet"))
+        deck.append(Card("Pet"))
+        deck.append(Card("Pet"))
+        deck.append(Card("Lick"))
+        deck.append(Card("Lick"))
+        deck.append(Card("Lick"))
+        deck.append(Card("Massage"))
+        deck.append(Card("Massage"))
+        deck.append(Card("Massage"))
+        deck.append(Card("Suck"))
+        deck.append(Card("Suck"))
+        deck.append(Card("Fuck"))
+        deck.append(Card("Fuck"))
+        
+        player.deck, ai.deck = deck[:], deck[:]
+        player.draw_cards(9)
+        ai.draw_cards(3)
+        
+        players = [player, ai] # List with all the actors in case we get more than two in the future.
+        
+    return
+        
