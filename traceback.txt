@@ -9,9 +9,9 @@ While running game code:
     $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
   File "game/script.rpy", line 169, in <module>
     $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
-  File "renpy/common/00action_other.rpy", line 420, in __call__
-    self.callable(*self.args, **self.kwargs)
-NameError: global name 'play_cards' is not defined
+  File "renpy/common/00action_data.rpy", line 50, in get_selected
+    return getattr(self.object, self.field) == self.value
+AttributeError: 'StoreModule' object has no attribute 'hand'
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -32,35 +32,35 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2276, in interact
     repeat, rv = self.interact_core(preloads=preloads, **kwargs)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2907, in interact_core
-    rv = root_widget.event(ev, x, y, 0)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\screen.py", line 625, in event
-    rv = self.child.event(ev, x, y, st)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 188, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 785, in event
-    return handle_click(self.clicked)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 728, in handle_click
-    rv = run(action)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 290, in run
-    return var(*args, **kwargs)
-  File "renpy/common/00action_other.rpy", line 420, in __call__
-    self.callable(*self.args, **self.kwargs)
-  File "F:\Development\RenPy\SxMnGm/game\python\static.py", line 6, in set_table_status
-    renpy.show(play_cards())
-NameError: global name 'play_cards' is not defined
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2527, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\screen.py", line 386, in visit_all
+    self.child.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 343, in visit_all
+    callback(self)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2527, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 691, in per_interact
+    if is_selected(self.action):
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 335, in is_selected
+    return clicked.get_selected()
+  File "renpy/common/00action_data.rpy", line 50, in get_selected
+    return getattr(self.object, self.field) == self.value
+AttributeError: 'StoreModule' object has no attribute 'hand'
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.4.467

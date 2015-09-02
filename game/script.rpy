@@ -82,9 +82,9 @@ screen play_cards():
             box_wrap True
         vbox:
             textbutton "Your hand":
-                action Function(set_table_status, "hand")
+                action SetVariable(table_status, "hand")
             textbutton "Your deck":
-                action Function(set_table_status, "yes")
+                action SetVariable(table_status, "yes")
             textbutton "Your discard":
                 action Return(["pass"])                
         vbox:

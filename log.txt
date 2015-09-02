@@ -1,4 +1,4 @@
-Wed Sep 02 17:22:34 2015
+Wed Sep 02 18:18:14 2015
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.4.467
  
@@ -7,11 +7,11 @@ Bootstrap to the start of init.init took 0.05s
 Early init took 0.01s
 Loader init took 0.01s
 Loading error handling took 0.02s
-Loading script took 0.04s
+Loading script took 0.10s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.05s
-Analyze and compile ATL took 0.00s
+Running init code took 0.08s
+Analyze and compile ATL took 0.01s
 Index archives took 0.01s
 Cleaning cache took 0.03s
 Making clean stores took 0.00s
@@ -356,11 +356,11 @@ Texture testing:
 - 2048px textures work.
 - Target is 5 frames in 0.333333333333 seconds.
 - Frame drawn at 0.000000 seconds.
-- Frame drawn at 0.045000 seconds.
-- Frame drawn at 0.050000 seconds.
-- Frame drawn at 0.052000 seconds.
-- Frame drawn at 0.068000 seconds.
-- 0.068000 seconds to render 5 frames.
+- Frame drawn at 0.049000 seconds.
+- Frame drawn at 0.054000 seconds.
+- Frame drawn at 0.057000 seconds.
+- Frame drawn at 0.073000 seconds.
+- 0.073000 seconds to render 5 frames.
 Traceback (most recent call last):
   File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\execution.py", line 370, in run
     node.execute()
@@ -374,32 +374,32 @@ Traceback (most recent call last):
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2276, in interact
     repeat, rv = self.interact_core(preloads=preloads, **kwargs)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2907, in interact_core
-    rv = root_widget.event(ev, x, y, 0)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\screen.py", line 625, in event
-    rv = self.child.event(ev, x, y, st)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 188, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 785, in event
-    return handle_click(self.clicked)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 728, in handle_click
-    rv = run(action)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 290, in run
-    return var(*args, **kwargs)
-  File "renpy/common/00action_other.rpy", line 420, in __call__
-    self.callable(*self.args, **self.kwargs)
-  File "F:\Development\RenPy\SxMnGm/game\python\static.py", line 6, in set_table_status
-    renpy.show(play_cards())
-NameError: global name 'play_cards' is not defined
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2527, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\screen.py", line 386, in visit_all
+    self.child.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 341, in visit_all
+    d.visit_all(callback)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 343, in visit_all
+    callback(self)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2527, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 691, in per_interact
+    if is_selected(self.action):
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 335, in is_selected
+    return clicked.get_selected()
+  File "renpy/common/00action_data.rpy", line 50, in get_selected
+    return getattr(self.object, self.field) == self.value
+AttributeError: 'StoreModule' object has no attribute 'hand'
