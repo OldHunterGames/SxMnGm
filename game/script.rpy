@@ -7,199 +7,46 @@ init python:
     from Player import *
     from static import *
     from decks import *
+    from implements import *
+    from gameEngine import *
     import random
     from random import shuffle
 
-    # Our Hotel project already has a lot of imports*
-    
-screen play_cards():
-    frame: # AI NAME
-        xysize (200, 30) # A size of this frame in pixels.
-        align (0.95, 0.01) # Positioning on the screen.
-        has vbox spacing 10
-        text ai.name 
-        
-    frame: # AI STATBLOCK
-        xysize (200, 220) # A size of this frame in pixels.
-        align (0.95, 0.95) # Positioning on the screen.
-        
-        # Frame by default takes fixed as it's child. Fixed layout means everything will be positioned as programmer wishes it, no forced order or anything like that. We are not going to change that.
-        # We however are going to change that default to a vbox. VBox plainly means that everything in the container will be placed vertically, automatically by Ren'Py! like so:
-        has vbox spacing 10 # spacing tells vbox to put 10 pixels between it's children
-        
-        text "Pleasure: {}".format(ai.pleasure) 
-        text "Pain: {}".format(ai.pain) 
-        text "Shame: {}".format(ai.shame)         
-        text "\nExtasy: {}".format(ai.extasy_tokens)         
-        
-    imagebutton: # AI AVATAR
-        align (0.95, 0.1)
-        idle im.Scale("images/female/01.jpg", 200, 200)
-        hover im.MatrixColor(im.Scale("images/female/01.jpg", 200, 200), im.matrix.brightness(0.05))
-        action Jump("session_end")
-
-    imagebutton: # AI IMPLEMENT
-        align (0.95, 0.5)
-        idle im.Scale("images/implement/boobs.jpg", 200, 200)
-        hover im.MatrixColor(im.Scale("images/implement/boobs.jpg", 200, 200), im.matrix.brightness(0.05))
-        action Return(ai)
-
-    frame: # PLAYER NAME
-        xysize (200, 30) # A size of this frame in pixels.
-        align (0.05, 0.01) # Positioning on the screen.
-        has vbox spacing 10
-        text player.name 
-        
-    imagebutton: # PLAYER AVATAR
-        align (0.05, 0.1)
-        idle im.Scale("images/male/01.jpg", 200, 200)
-        hover im.MatrixColor(im.Scale("images/male/01.jpg", 200, 200), im.matrix.brightness(0.05))
-        action Show("show_role", player)
-
-    imagebutton: # PLAYER IMPLEMENT
-        align (0.05, 0.5)
-        idle im.Scale("images/implement/dick.jpg", 200, 200)
-        hover im.MatrixColor(im.Scale("images/implement/dick.jpg", 200, 200), im.matrix.brightness(0.05))
-        action Jump("session_end")
-        
-    frame: # PLAYER STATBLOCK
-        xysize (200, 220) # A size of this frame in pixels.
-        align (0.05, 0.95) # Positioning on the screen.       
-        has vbox spacing 10
-        text "Pleasure: {}".format(player.pleasure) 
-        text "Pain: {}".format(player.pain) 
-        text "Shame: {}".format(player.shame)     
-        text "\nExtasy tokens: {}".format(player.extasy_tokens)         
-        
-    frame: # CONTROL MENU
-        xysize (600, 200)
-        align (0.5, 0.95)
-        has hbox spacing 10
-        
-        # Player has direct control over his/her cards, so we interate over the deck and create buttons on the screen:
-        hbox: # Same thing as VBox, just horizontal positioning.
-            xysize (600, 200)
-            box_wrap True
-            xfill True
-            vbox:
-                xalign 0.1 
-                text "[player.name]\n"                
-                textbutton "Hand":
-                    action SetVariable("table_status", "your_hand")
-                textbutton "Deck":
-                    action SetVariable("table_status", "your_deck")
-                textbutton "Discard":
-                    action SetVariable("table_status", "your_discard")
-            vbox:
-                xalign 0.5       
-                textbutton "Table":
-                    action SetVariable("table_status", "played_on_table")
-                textbutton "PASS":
-                    action Return(["pass"])
-            vbox:   
-                xalign 0.9          
-                text "[ai.name]\n"
-                textbutton "Hand":
-                    action SetVariable("table_status", "ai_hand")
-                textbutton "Deck":
-                    action SetVariable("table_status", "ai_deck")
-                textbutton "Discard":
-                    action SetVariable("table_status", "ai_discard")
-                
-    frame: # TABLE MENU
-        xysize (600, 420)
-        align (0.5, 0.1)
-        has vbox spacing 10
-        if table_status == "your_hand":
-            text "YOUR AVIABLE ACTIONS\n"
-            hbox:
-                box_wrap True
-                for card in player.hand:
-                    textbutton card.name:
-                        action Return(["play card", card, ai]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
-        elif table_status == "your_deck":
-            text "ACTIONS IN YOUR DECK\n"
-            hbox:
-                box_wrap True
-                for card in player.deck:
-                    text "[card.name], "
-        elif table_status == "your_discard":
-            text "YOUR USED ACTIONS\n"
-            hbox:
-                box_wrap True
-                for card in player.discard_pile:
-                    text "[card.name], "
-        elif table_status == "played_on_table":
-            text "ACTIONS MADE THIS ROUND\n"
-            hbox:
-                box_wrap True
-                text "[player.name]\n"
-                for card in player.table:
-                    text "[card.name], "
-                text "\n[ai.name]\n"
-                for card in player.table:
-                    text "[card.name], "    
-        else:
-            text "ERROR. WRONG table_status"            
-
-screen show_role(whois):
-    frame: 
-        align (0.5, 0.5)                 
-        has vbox spacing 10
-        text "[whois.name]"
-        hbox:
-            align (0.5, 0.9)
-            box_wrap True
-            textbutton "Play!":
-                action Return("confirm")
-            textbutton "Back":
-                action Return("reject")          
-            
-screen show_card():
-    frame: 
-        align (0.5, 0.5)                 
-        has vbox spacing 10
-        text card.name
-        text "".join(card.description)
-        hbox:
-            align (0.5, 0.9)
-            box_wrap True
-            textbutton "Play!":
-                action Return("confirm")
-            textbutton "Back":
-                action Return("reject")                
-    
-screen new_round():
-    frame: 
-        align (0.5, 0.5)                 
-        has vbox spacing 10
-        text "End of round"
-        text "One who have 2 or more extasy points (while opponent has less) is LOSER."
-        text "Your extasy: [player.extasy_tokens]"
-        text "Oponent extasy: [ai.extasy_tokens]"
-        hbox:
-            align (0.5, 0.9)
-            box_wrap True
-            textbutton "Next round":
-                action Return("continue")
-            textbutton "End game":
-                action Return("end")  
-                
 # The game starts here.
 label start:
-    call load_resources
     show expression "images/bg.jpg" as bg    
+    
+    menu:
+        "Make love":
+            "In this mode your final score is equal to summ of your and your partners extasy points. One extasy point awarded for ending the round with overall pleasure of 10+. You have unlimited rounds, but limited actions. When all actions made, the game ends and you get your final score."
+            $ smg_mode = "love"
+        "Rape":
+            "In this mode your score is equal to your extasy points. One extasy point awarded for ending the round with overall pleasure of 10+. You have unlimited rounds, but limited actions. When all actions made, the game ends and you get your final score."
+            $ smg_mode = "rape"
+        "Service":
+            "In this mode your score is equal to extasy points of your partner, but not yours. One extasy point awarded for ending the round with overall pleasure of 10+. You have unlimited rounds, but limited actions. When all actions made, the game ends and you get your final score."
+            $ smg_mode = "service"
+        "Sex contest":
+            "This mode is cometitive. Whoever have 2 extasy points - LOSES. One extasy point given at the rounds end to player with max overall pleasure. In the case of tie - computer player wins (and extasy point goes to you!). So you will have 2 rounds at minimum and 3 at maximum to win. Just like Mortal Kombat, but make fuck not fight."
+            $ smg_mode = "competitive"
+            
     "Let's match begin!"
     $ index = 0
-    $ table_status = "hand"
-    call new_round
+    $ table_status = "your_hand"
+    call load_resources   
+    
     return
     
 label new_round:    
+    $ game.players[0].choose_implement()    
+    $ game.players[1].choose_implement()    
     show screen play_cards
     while True:
         $ active_player = players[index]
         $ index = index = (index+1) % len(players) # This is a cool python trick for working with lists :) Turn will go to the next player, we do not have to worry about a thing.
+        python:
+             if all(p for p in players if p.passed):
+                [setattr(p, "passed", False) for p in players]
         if active_player.passed:
             $ active_player = players[index]
         if ai.passed and not player.passed:
@@ -272,16 +119,19 @@ label session_end:
 label load_resources:
     
     python:
-        player = Player("Jack o'Nine", "player")
-        ai = Player("Sex Slave", "ai")
-        player.deck = deck_man_standart[:]
-        ai.deck = deck_woman_standart[:]
-        player.shuffle_deck()
-        ai.shuffle_deck()
-        player.draw_cards(10)
-        ai.draw_cards(10)
+        # Initialising players
+        #p1 = Person("OldHuntsman")
+        #p2 = Person("Copywrite")
+        player = Player(Person("OldHuntsman"), "player")
+        ai = Player(Person("Copyright"), "ai")
+        players = [player, ai]        
         
-        players = [player, ai] # List with all the actors in case we get more than two in the future.
+        # Initialising game        
+        game = SMGEngine(players) 
+        game.start_party()
         
+    # List with all the actors in case we get more than two in the future.
+        
+    call new_round    
     return
         

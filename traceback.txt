@@ -1,22 +1,36 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 195, in script call
+  File "game/script.rpy", line 36, in script call
+    call load_resources
+  File "game/script.rpy", line 137, in script call
     call new_round
-  File "game/script.rpy", line 210, in script
+  File "game/script.rpy", line 59, in script call
     call player_turn
-Exception: Possible infinite loop.
+  File "game/script.rpy", line 81, in script
+    if result[0] == "play card":
+  File "game/script.rpy", line 81, in <module>
+    if result[0] == "play card":
+TypeError: 'Player' object does not support indexing
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 195, in script call
+  File "game/script.rpy", line 36, in script call
+    call load_resources
+  File "game/script.rpy", line 137, in script call
     call new_round
-  File "game/script.rpy", line 210, in script
+  File "game/script.rpy", line 59, in script call
     call player_turn
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\execution.py", line 52, in check_infinite_loop
-    raise Exception("Possible infinite loop.")
-Exception: Possible infinite loop.
+  File "game/script.rpy", line 81, in script
+    if result[0] == "play card":
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ast.py", line 1593, in execute
+    if renpy.python.py_eval(condition):
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\python.py", line 1482, in py_eval
+    return eval(py_compile(source, 'eval'), globals, locals)
+  File "game/script.rpy", line 81, in <module>
+    if result[0] == "play card":
+TypeError: 'Player' object does not support indexing
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.4.467

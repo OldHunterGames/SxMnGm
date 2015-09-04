@@ -1,18 +1,4 @@
-﻿init -1 python:
-    import sys
-    sys.path.append(renpy.loader.transfn("python"))
-
-init python:
-    from Card import *
-    from Player import *
-    from static import *
-    from decks import *
-    from implements import *
-    from gameEngine import *
-    import random
-    from random import shuffle
-    
-# This file is in the public domain. Feel free to modify it as a basis
+﻿# This file is in the public domain. Feel free to modify it as a basis
 # for your own screens.
 
 # Note that many of these screens may be given additional arguments in the
@@ -597,14 +583,14 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         
     imagebutton: # AI AVATAR
         align (0.95, 0.1)
-        idle im.Scale(game.players[1].avatar, 200, 200)
-        hover im.MatrixColor(im.Scale(game.players[1].avatar, 200, 200), im.matrix.brightness(0.05))
+        idle im.Scale("images/female/01.jpg", 200, 200)
+        hover im.MatrixColor(im.Scale("images/female/01.jpg", 200, 200), im.matrix.brightness(0.05))
         action Jump("session_end")
 
     imagebutton: # AI IMPLEMENT
         align (0.95, 0.5)
-        idle im.Scale(game.players[1].active_implement.image, 200, 200)
-        hover im.MatrixColor(im.Scale(game.players[1].active_implement.image, 200, 200), im.matrix.brightness(0.05))
+        idle im.Scale("images/implement/boobs.jpg", 200, 200)
+        hover im.MatrixColor(im.Scale("images/implement/boobs.jpg", 200, 200), im.matrix.brightness(0.05))
         action Return(ai)
 
     frame: # PLAYER NAME
@@ -615,14 +601,14 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         
     imagebutton: # PLAYER AVATAR
         align (0.05, 0.1)
-        idle im.Scale(game.players[0].avatar, 200, 200)
-        hover im.MatrixColor(im.Scale(game.players[0].avatar, 200, 200), im.matrix.brightness(0.05))
+        idle im.Scale("images/male/01.jpg", 200, 200)
+        hover im.MatrixColor(im.Scale("images/male/01.jpg", 200, 200), im.matrix.brightness(0.05))
         action Show("show_role", player)
 
     imagebutton: # PLAYER IMPLEMENT
         align (0.05, 0.5)
-        idle im.Scale(game.players[0].active_implement.image, 200, 200)
-        hover im.MatrixColor(im.Scale(game.players[0].active_implement.image, 200, 200), im.matrix.brightness(0.05))
+        idle im.Scale("images/implement/dick.jpg", 200, 200)
+        hover im.MatrixColor(im.Scale("images/implement/dick.jpg", 200, 200), im.matrix.brightness(0.05))
         action Jump("session_end")
         
     frame: # PLAYER STATBLOCK
