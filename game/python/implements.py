@@ -15,6 +15,7 @@ class Implement(object):
         self.erogenous = False
         self.penetrator = False
         self.hole = False
+        self.action_buttons = [("Ok", "any")]
         if name == "Boobs":
             self.image = "images/implement/boobs.jpg"
             self.size = "B"

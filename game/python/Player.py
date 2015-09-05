@@ -3,12 +3,14 @@ import renpy.store as store
 import renpy.exports as renpy
 from decks import *
 from implements import *
+from sex_roles import *
 from random import shuffle
 
 class Player(object):
     def __init__(self, person, controller):
         self.controller = controller  # ai/player
         self.name = person.name
+        self.sexual_role = person.sexual_role
         self.avatar = person.avatar
         self.deck = person.deck
         self.discard_pile = []
@@ -48,6 +50,7 @@ class Player(object):
         self.hand.remove(card)
         self.table.append(card)
         card.played_on(target, self)
+
     def choose_implement(self):
         shuffle(self.implements)
         card = self.implements.pop()
@@ -59,7 +62,7 @@ class Person(object):
         self.avatar = "images/male/huntsman.jpg"
         self.deck = deck_man_standart[:]
         self.implements = [Implement("Male hands"), Implement("Mr.Flabby"), Implement("Male butt"), Implement("Male mouth")]
-        self.sexual_role = "lover"
+        self.sexual_role = SexRole("Lover")
         if preset == "Copyright":
             self.name = "Copyright"
             self.avatar = "images/female/copyright.jpg"

@@ -13,6 +13,7 @@ class Card(object):
         self.special = "do_noting"
         self.description = "Blank card"
         self.autoplay = False
+        self.action_buttons = [("Ok", "any")]
         if name == "Kiss":
             self.value = 2
             self.directions = ["caress", "bliss"]

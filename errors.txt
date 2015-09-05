@@ -2,38 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 597: end of line expected.
-(Perhaps you left out a " at the end of the first line.)
-    """              
-        imagebutton: # AI AVATAR
-            align (0.95, 0.1)
-            idle im.Scale("images/implement/boobs.jpg", 200, 200)
-                              ^
-            hover im.MatrixColor(im.Scale("images/implement/boobs.jpg", 200, 200), im.matrix.brightness(0.05))
-            action Jump("session_end")
-    
-        imagebutton: # AI IMPLEMENT
-            align (0.95, 0.5)
-            idle im.Scale("images/implement/boobs.jpg", 200, 200)
-            hover im.MatrixColor(im.Scale("images/implement/boobs.jpg", 200, 200), im.matrix.brightness(0.05))
-            action Return(ai)
-    """      
-
-File "game/screens.rpy", line 615: end of line expected.
-(Perhaps you left out a " at the end of the first line.)
-    """        
-        imagebutton: # PLAYER AVATAR
-            align (0.05, 0.1)
-            idle im.Scale("images/implement/boobs.jpg", 200, 200)
-                              ^
-            hover im.MatrixColor(im.Scale("images/implement/boobs.jpg", 200, 200), im.matrix.brightness(0.05))
-            action Show("show_role", player)
-    
-        imagebutton: # PLAYER IMPLEMENT
-            align (0.05, 0.5)
-            idle im.Scale("images/implement/dick.jpg", 200, 200)
-            hover im.MatrixColor(im.Scale("images/implement/dick.jpg", 200, 200), im.matrix.brightness(0.05))
-            action Jump("session_end")
-    """        
+File "game/script.rpy", line 72: expected statement.
+    nm = card.name
+       ^
 
 Ren'Py Version: Ren'Py 6.99.4.467

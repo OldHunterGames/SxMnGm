@@ -3,34 +3,194 @@
 While running game code:
   File "game/script.rpy", line 36, in script call
     call load_resources
-  File "game/script.rpy", line 137, in script call
+  File "game/script.rpy", line 134, in script call
     call new_round
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 44, in script call
+    call new_turn
+  File "game/script.rpy", line 49, in script call
     call player_turn
-  File "game/script.rpy", line 81, in script
-    if result[0] == "play card":
-  File "game/script.rpy", line 81, in <module>
-    if result[0] == "play card":
-TypeError: 'Player' object does not support indexing
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 108, in script call
+    call new_round
+  File "game/script.rpy", line 44, in script call
+    call new_turn
+  File "game/script.rpy", line 49, in script call
+    call player_turn
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 108, in script call
+    call new_round
+  File "game/script.rpy", line 44, in script call
+    call new_turn
+  File "game/script.rpy", line 49, in script call
+    call player_turn
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 101, in script
+    $ round_end(game.players[0], game.players[1])
+  File "game/script.rpy", line 101, in <module>
+    $ round_end(game.players[0], game.players[1])
+AttributeError: 'Player' object has no attribute 'shameame'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/script.rpy", line 36, in script call
     call load_resources
-  File "game/script.rpy", line 137, in script call
+  File "game/script.rpy", line 134, in script call
     call new_round
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 44, in script call
+    call new_turn
+  File "game/script.rpy", line 49, in script call
     call player_turn
-  File "game/script.rpy", line 81, in script
-    if result[0] == "play card":
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ast.py", line 1593, in execute
-    if renpy.python.py_eval(condition):
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\python.py", line 1482, in py_eval
-    return eval(py_compile(source, 'eval'), globals, locals)
-  File "game/script.rpy", line 81, in <module>
-    if result[0] == "play card":
-TypeError: 'Player' object does not support indexing
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 108, in script call
+    call new_round
+  File "game/script.rpy", line 44, in script call
+    call new_turn
+  File "game/script.rpy", line 49, in script call
+    call player_turn
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 108, in script call
+    call new_round
+  File "game/script.rpy", line 44, in script call
+    call new_turn
+  File "game/script.rpy", line 49, in script call
+    call player_turn
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 79, in script call
+    call ai_turn
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 54, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 68, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 59, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 101, in script
+    $ round_end(game.players[0], game.players[1])
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ast.py", line 785, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\python.py", line 1448, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "game/script.rpy", line 101, in <module>
+    $ round_end(game.players[0], game.players[1])
+  File "F:\Development\RenPy\SxMnGm/game\python\static.py", line 67, in round_end
+    result_prercalculation(player, computer)
+  File "F:\Development\RenPy\SxMnGm/game\python\static.py", line 16, in result_prercalculation
+    actor.shame += actor.shameame
+AttributeError: 'Player' object has no attribute 'shameame'
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.4.467

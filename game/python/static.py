@@ -13,7 +13,7 @@ def result_prercalculation(actor, partner):
     if "laceration" in actor.modifiers:
         actor.pain += actor.pain
     if "hysteria" in actor.modifiers:
-        actor.shame += actor.shameame
+        actor.shame += actor.shame
     if "tenderness" in actor.modifiers:
         partner.pleasure += partner.pleasure
     if "brutality" in actor.modifiers:

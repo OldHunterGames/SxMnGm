@@ -41,49 +41,34 @@ label new_round:
     $ game.players[0].choose_implement()    
     $ game.players[1].choose_implement()    
     show screen play_cards
-    while True:
-        $ active_player = players[index]
-        $ index = index = (index+1) % len(players) # This is a cool python trick for working with lists :) Turn will go to the next player, we do not have to worry about a thing.
-        python:
-             if all(p for p in players if p.passed):
-                [setattr(p, "passed", False) for p in players]
-        if active_player.passed:
-            $ active_player = players[index]
-        if ai.passed and not player.passed:
-            jump round_end
-        elif active_player.controller == "ai":     
-            call ai_turn
-        else:
-            call player_turn
+    call new_turn
+    return
+    
+label new_turn:
+    $ game.turn += 1    
+    call player_turn
     return
 
 label ai_turn:
-        if active_player.hand and not active_player.passed:
-            # We let ui make a move.
-            # HERE: We will make a choice between the opponents when we have more than one, just one extra line of code.
-            $ card = random.choice(active_player.hand)
-            $ active_player.play_card(card, player)
-            "[active_player.name] action is [card.name]. [card.description]"
-            if player.passed:
-                $ active_player.passed = True    
-        return
+    $ location_to_call = game.ai_move()
+    call expression location_to_call      
+    return
     
 label player_turn:
-    hide screen show_card
-    show screen play_cards
-    if not active_player.passed:
-        $ result = ui.interact() # This is a golden line in complex Ren'Py loops, you can get player input from screen with it!
-        # This obviosuly assumes that a real player is to make a move and this is the part that is going to wait for the player to make one!
-        # When player clicks on a card on the screen, we get a list of a card and target in the return.
-        # When we will allow more than one target, target would have to be chosen on screen just like the card... (with a button)
-        if result[0] == "play card":
-            $ card, target = result[1], result[2] # We get the card and opponent from the list returned by the screen!
-            call show_card
-        if result[0] == "pass":
-            "You passed!"
-            $ active_player.passed = True
+    if game.players[0].passed:
+        call ai_turn
     else:
-        pass    
+        $ location_to_call = game.render_input(ui.interact())  
+        call expression location_to_call   
+    return
+
+label pop_up:
+    hide screen play_cards
+    show screen pop_up
+    $ location_to_call = game.render_input(ui.interact())   
+    hide screen pop_up
+    show screen play_cards
+    call expression location_to_call     
     return
     
 label show_card:
@@ -91,15 +76,32 @@ label show_card:
     show screen show_card
     $ result = ui.interact()
     if result == "confirm":
-        $ active_player.play_card(card, target)
+        $ game.players[0].play_card(game.output, game.players[1])
         hide screen show_card
         show screen play_cards
+        call ai_turn
     else:
         call player_turn
     return
     
+label play_card:
+    hide screen play_cards
+    show screen show_card
+    $ result = ui.interact()
+    if result == "confirm":
+        $ active_player.play_card(card, game.players[1])
+        hide screen show_card
+        show screen play_cards
+    else:
+        call player_turn
+    return    
+    
+label test:
+    "Test complete!"
+    return
+    
 label round_end:
-    $ round_end(player, ai)
+    $ round_end(game.players[0], game.players[1])
     hide screen show_card
     hide screen play_cards    
     show screen new_round

@@ -1,17 +1,4 @@
-﻿init -1 python:
-    import sys
-    sys.path.append(renpy.loader.transfn("python"))
-
-init python:
-    from Card import *
-    from Player import *
-    from static import *
-    from decks import *
-    from implements import *
-    from gameEngine import *
-    import random
-    from random import shuffle
-    
+﻿   
 # This file is in the public domain. Feel free to modify it as a basis
 # for your own screens.
 
@@ -599,13 +586,13 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         align (0.95, 0.1)
         idle im.Scale(game.players[1].avatar, 200, 200)
         hover im.MatrixColor(im.Scale(game.players[1].avatar, 200, 200), im.matrix.brightness(0.05))
-        action Jump("session_end")
+        action Return("show_ai_role")
 
     imagebutton: # AI IMPLEMENT
         align (0.95, 0.5)
         idle im.Scale(game.players[1].active_implement.image, 200, 200)
         hover im.MatrixColor(im.Scale(game.players[1].active_implement.image, 200, 200), im.matrix.brightness(0.05))
-        action Return(ai)
+        action Return("show_ai_implement")
 
     frame: # PLAYER NAME
         xysize (200, 30) # A size of this frame in pixels.
@@ -617,13 +604,13 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         align (0.05, 0.1)
         idle im.Scale(game.players[0].avatar, 200, 200)
         hover im.MatrixColor(im.Scale(game.players[0].avatar, 200, 200), im.matrix.brightness(0.05))
-        action Show("show_role", player)
+        action Return("show_your_role")
 
     imagebutton: # PLAYER IMPLEMENT
         align (0.05, 0.5)
         idle im.Scale(game.players[0].active_implement.image, 200, 200)
         hover im.MatrixColor(im.Scale(game.players[0].active_implement.image, 200, 200), im.matrix.brightness(0.05))
-        action Jump("session_end")
+        action Return("show_your_implement")
         
     frame: # PLAYER STATBLOCK
         xysize (200, 220) # A size of this frame in pixels.
@@ -632,7 +619,7 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         text "Pleasure: {}".format(player.pleasure) 
         text "Pain: {}".format(player.pain) 
         text "Shame: {}".format(player.shame)     
-        text "\nExtasy tokens: {}".format(player.extasy_tokens)         
+        text "\nExtasy: {}".format(player.extasy_tokens)         
         
     frame: # CONTROL MENU
         xysize (600, 200)
@@ -658,7 +645,7 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
                 textbutton "Table":
                     action SetVariable("table_status", "played_on_table")
                 textbutton "PASS":
-                    action Return(["pass"])
+                    action Return("pass")
             vbox:   
                 xalign 0.9          
                 text "[ai.name]\n"
@@ -677,53 +664,53 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
             text "YOUR AVIABLE ACTIONS\n"
             hbox:
                 box_wrap True
-                for card in player.hand:
+                for card in game.players[0].hand:
                     textbutton card.name:
-                        action Return(["play card", card, ai]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
+                        action Return(["play card", card, game.players[1]]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
         elif table_status == "your_deck":
             text "ACTIONS IN YOUR DECK\n"
             hbox:
                 box_wrap True
-                for card in player.deck:
+                for card in game.players[0].deck:
                     text "[card.name], "
         elif table_status == "your_discard":
             text "YOUR USED ACTIONS\n"
             hbox:
                 box_wrap True
-                for card in player.discard_pile:
+                for card in game.players[0].discard_pile:
                     text "[card.name], "
         elif table_status == "played_on_table":
             text "ACTIONS MADE THIS ROUND\n"
             hbox:
                 box_wrap True
                 text "[player.name]\n"
-                for card in player.table:
+                for card in game.players[0].table:
                     text "[card.name], "
                 text "\n[ai.name]\n"
-                for card in player.table:
+                for card in game.players[0].table:
                     text "[card.name], "    
         else:
             text "ERROR. WRONG table_status"            
 
-screen show_role(whois):        # OPENS WEN YOU CLICK ON AVATARS
+screen pop_up():             # OPENS STANDART POPUP
     frame: 
         align (0.5, 0.5)                 
         has vbox spacing 10
-        text "[whois.name]"
+        text "[game.message_header]"
+        text "[game.message_main]"
         hbox:
             align (0.5, 0.9)
             box_wrap True
-            textbutton "Play!":
-                action Return("confirm")
-            textbutton "Back":
-                action Return("reject")          
+            for btn in game.message_buttons:
+                textbutton "[btn[0]]":
+                    action Return("[btn[1]]")
             
 screen show_card():             # OPENS WHEN YOU CLICK ON CARD
     frame: 
         align (0.5, 0.5)                 
         has vbox spacing 10
-        text card.name
-        text "".join(card.description)
+        text game.output.name
+        text "".join(game.output.description)
         hbox:
             align (0.5, 0.9)
             box_wrap True
