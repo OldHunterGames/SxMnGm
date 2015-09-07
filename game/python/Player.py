@@ -18,7 +18,6 @@ class Player(object):
         self.table = []
         self.passed = False
         self.pleasure = 0
-        self.pleasure_threshold = 10
         self.pain = 0
         self.shame = 0
         self.extasy_tokens = 0
@@ -28,6 +27,10 @@ class Player(object):
         for implement in person.implements:  # Making implements for this instant of player, from corresponding character list
             self.implements.append(Implement(implement.name, self))
         self.active_implement = self.implements[0]
+
+    def get_pleasure_threshold(self):
+        pleasure_threshold = 10 + self.extasy_tokens*5
+        return pleasure_threshold
 
     def shuffle_deck(self):
         shuffle(self.deck)
@@ -57,15 +60,40 @@ class Player(object):
         self.active_implement = card
 
 class Person(object):
-    def __init__(self, preset):
-        self.name = "OldHuntsman"
+    def __init__(self, preset = "OldHuntsman"):
+        self.name = preset
         self.avatar = "images/male/huntsman.jpg"
         self.deck = deck_man_standart[:]
         self.implements = [Implement("Male hands"), Implement("Mr.Flabby"), Implement("Male butt"), Implement("Male mouth")]
         self.sexual_role = SexRole("Lover")
         if preset == "Copyright":
-            self.name = "Copyright"
             self.avatar = "images/female/copyright.jpg"
             self.implements = [Implement("Female hands"), Implement("Dry slit"), Implement("Female butt"), Implement("Female mouth"), Implement("Boobs")]
             self.deck = deck_woman_standart[:]
-
+        if preset == "Red Hood":
+            self.avatar = "images/female/hood.jpg"
+            self.implements = [Implement("Female hands"), Implement("Dry slit"), Implement("Female butt"), Implement("Female mouth"), Implement("Boobs")]
+            self.deck = deck_virgin[:]
+            self.sexual_role = SexRole("Victim")
+        if preset == "Mistress":
+            self.avatar = "images/female/mistress.jpg"
+            self.implements = [Implement("Female hands"), Implement("Dry slit"), Implement("Female butt"), Implement("Female mouth"), Implement("Boobs")]
+            self.deck = deck_succubus[:]
+            self.sexual_role = SexRole("Succubus")
+        if preset == "Sex Slave":
+            self.avatar = "images/female/slave.jpg"
+            self.implements = [Implement("Female hands"), Implement("Dry slit"), Implement("Female butt"), Implement("Female mouth"), Implement("Boobs")]
+            self.deck = deck_whore[:]
+            self.sexual_role = SexRole("Whore")
+        if preset == "Jack o'Nine":
+            self.avatar = "images/male/jack.jpg"
+            self.deck = deck_man_standart[:]
+            self.sexual_role = SexRole("Lover")
+        if preset == "Sergey Volkov":
+            self.avatar = "images/male/wolf.jpg"
+            self.deck = deck_rapist[:]
+            self.sexual_role = SexRole("Rapist")
+        if preset == "Bitcher":
+            self.avatar = "images/male/witcher.jpg"
+            self.deck = deck_succubus[:]
+            self.sexual_role = SexRole("Succubus")

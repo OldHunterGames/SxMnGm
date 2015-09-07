@@ -1,196 +1,122 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 36, in script call
-    call load_resources
-  File "game/script.rpy", line 134, in script call
-    call new_round
-  File "game/script.rpy", line 44, in script call
-    call new_turn
   File "game/script.rpy", line 49, in script call
-    call player_turn
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 108, in script call
     call new_round
-  File "game/script.rpy", line 44, in script call
+  File "game/script.rpy", line 60, in script call
     call new_turn
-  File "game/script.rpy", line 49, in script call
+  File "game/script.rpy", line 65, in script call
     call player_turn
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 78, in script call
     call expression location_to_call
-  File "game/script.rpy", line 79, in script call
+  File "game/script.rpy", line 98, in script call
     call ai_turn
-  File "game/script.rpy", line 54, in script call
+  File "game/script.rpy", line 70, in script call
     call expression location_to_call
-  File "game/script.rpy", line 68, in script call
+  File "game/script.rpy", line 87, in script call
     call expression location_to_call
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 78, in script call
     call expression location_to_call
-  File "game/script.rpy", line 79, in script call
+  File "game/script.rpy", line 98, in script call
     call ai_turn
-  File "game/script.rpy", line 54, in script call
+  File "game/script.rpy", line 70, in script call
     call expression location_to_call
-  File "game/script.rpy", line 68, in script call
+  File "game/script.rpy", line 87, in script call
     call expression location_to_call
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 78, in script call
     call expression location_to_call
-  File "game/script.rpy", line 79, in script call
+  File "game/script.rpy", line 70, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 87, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 75, in script call
     call ai_turn
-  File "game/script.rpy", line 54, in script call
+  File "game/script.rpy", line 70, in script call
     call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 108, in script call
+  File "game/script.rpy", line 113, in script call
     call new_round
-  File "game/script.rpy", line 44, in script call
-    call new_turn
-  File "game/script.rpy", line 49, in script call
-    call player_turn
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 79, in script call
-    call ai_turn
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 79, in script call
-    call ai_turn
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 101, in script
-    $ round_end(game.players[0], game.players[1])
-  File "game/script.rpy", line 101, in <module>
-    $ round_end(game.players[0], game.players[1])
-AttributeError: 'Player' object has no attribute 'shameame'
+  File "game/script.rpy", line 54, in script
+    menu:
+  File "renpy/common/00action_other.rpy", line 420, in __call__
+    self.callable(*self.args, **self.kwargs)
+ValueError: list.remove(x): x not in list
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 36, in script call
-    call load_resources
-  File "game/script.rpy", line 134, in script call
-    call new_round
-  File "game/script.rpy", line 44, in script call
-    call new_turn
   File "game/script.rpy", line 49, in script call
-    call player_turn
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 108, in script call
     call new_round
-  File "game/script.rpy", line 44, in script call
+  File "game/script.rpy", line 60, in script call
     call new_turn
-  File "game/script.rpy", line 49, in script call
+  File "game/script.rpy", line 65, in script call
     call player_turn
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 78, in script call
     call expression location_to_call
-  File "game/script.rpy", line 79, in script call
+  File "game/script.rpy", line 98, in script call
     call ai_turn
-  File "game/script.rpy", line 54, in script call
+  File "game/script.rpy", line 70, in script call
     call expression location_to_call
-  File "game/script.rpy", line 68, in script call
+  File "game/script.rpy", line 87, in script call
     call expression location_to_call
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 78, in script call
     call expression location_to_call
-  File "game/script.rpy", line 79, in script call
+  File "game/script.rpy", line 98, in script call
     call ai_turn
-  File "game/script.rpy", line 54, in script call
+  File "game/script.rpy", line 70, in script call
     call expression location_to_call
-  File "game/script.rpy", line 68, in script call
+  File "game/script.rpy", line 87, in script call
     call expression location_to_call
-  File "game/script.rpy", line 59, in script call
+  File "game/script.rpy", line 78, in script call
     call expression location_to_call
-  File "game/script.rpy", line 79, in script call
+  File "game/script.rpy", line 70, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 87, in script call
+    call expression location_to_call
+  File "game/script.rpy", line 75, in script call
     call ai_turn
-  File "game/script.rpy", line 54, in script call
+  File "game/script.rpy", line 70, in script call
     call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 108, in script call
+  File "game/script.rpy", line 113, in script call
     call new_round
-  File "game/script.rpy", line 44, in script call
-    call new_turn
-  File "game/script.rpy", line 49, in script call
-    call player_turn
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 79, in script call
-    call ai_turn
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 79, in script call
-    call ai_turn
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 54, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 68, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 59, in script call
-    call expression location_to_call
-  File "game/script.rpy", line 101, in script
-    $ round_end(game.players[0], game.players[1])
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ast.py", line 785, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\python.py", line 1448, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "game/script.rpy", line 101, in <module>
-    $ round_end(game.players[0], game.players[1])
-  File "F:\Development\RenPy\SxMnGm/game\python\static.py", line 67, in round_end
-    result_prercalculation(player, computer)
-  File "F:\Development\RenPy\SxMnGm/game\python\static.py", line 16, in result_prercalculation
-    actor.shame += actor.shameame
-AttributeError: 'Player' object has no attribute 'shameame'
+  File "game/script.rpy", line 54, in script
+    menu:
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ast.py", line 1411, in execute
+    choice = renpy.exports.menu(choices, self.set)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\exports.py", line 733, in menu
+    rv = renpy.store.menu(items)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\exports.py", line 909, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\ui.py", line 277, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2276, in interact
+    repeat, rv = self.interact_core(preloads=preloads, **kwargs)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\core.py", line 2907, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\screen.py", line 625, in event
+    rv = self.child.event(ev, x, y, st)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 188, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\layout.py", line 877, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 785, in event
+    return handle_click(self.clicked)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 728, in handle_click
+    rv = run(action)
+  File "F:\Development\RenPy\renpy-6.15.7-sdk\renpy\display\behavior.py", line 290, in run
+    return var(*args, **kwargs)
+  File "renpy/common/00action_other.rpy", line 420, in __call__
+    self.callable(*self.args, **self.kwargs)
+  File "F:\Development\RenPy\SxMnGm/game\python\gameEngine.py", line 34, in equip_implement
+    self.players[0].implements.remove(self.players[0].active_implement)
+ValueError: list.remove(x): x not in list
 
 Windows-7-6.1.7601-SP1
 Ren'Py 6.99.4.467

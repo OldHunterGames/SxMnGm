@@ -58,20 +58,4 @@ def calculated_result(actor, partner):
         score += partner.shame
         score += partner.pain
     score += actor.pleasure - actor.pain - actor.shame
-    if score >= actor.pleasure_threshold:
-        actor.extasy_tokens += 1
-    if score < -5:
-        actor.misery_tokens += 1
-
-def round_end(player, computer):
-    result_prercalculation(player, computer)
-    result_prercalculation(computer, player)
-    calculated_result(player, computer)
-    calculated_result(computer, player)
-    player.passed, computer.passed = False, False
-    player.discard_pile, computer.discard_pile = player.table, computer.table
-    player.table, computer.table = [], []
-    player.pleasure, computer.pleasure = 0, 0
-    player.pain, computer.pain = 0, 0
-    player.shame, computer.shame = 0, 0
-    player.modifiers, computer.modifiers = [], []
+    return score

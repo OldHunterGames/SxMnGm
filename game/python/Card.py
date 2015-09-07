@@ -14,42 +14,48 @@ class Card(object):
         self.description = "Blank card"
         self.autoplay = False
         self.action_buttons = [("Ok", "any")]
+        self.skill = "misc"
         if name == "Kiss":
             self.value = 2
             self.directions = ["caress", "bliss"]
-            self.description = "Gives +" + str(self.value) + " pleasure to you and your partner."
+            self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Double if you use an oral implenent."
+            self.skill = "oral"
         if name == "Fondle":
             self.value = 4
             self.directions = ["caress"]
-            self.description = "Gives your partner +" + str(self.value) + " pleasure."
+            self.description = "Gives your partner +" + str(self.value) + " pleasure. Double if you use a manual implenent."
+            self.skill = "petting"
         if name == "Lick":
+            self.value = 3
+            self.directions = ["caress"]
+            self.description = "Gives your partner +" + str(self.value) + " pleasure.  Double if you use an oral implenent."
+            self.skill = "oral"
+        if name == "Massage":
             self.value = 5
             self.directions = ["caress"]
-            self.description = "Gives your partner +" + str(self.value) + " pleasure."
-        if name == "Massage":
+            self.description = "Gives your partner +" + str(self.value) + " pleasure. Double if you use a manual implenent."
+            self.skill = "petting"
+        if name == "Suck":
             self.value = 6
             self.directions = ["caress"]
-            self.description = "Gives your partner +" + str(self.value) + " pleasure."
-        if name == "Suck":
-            self.value = 10
-            self.directions = ["caress"]
-            self.description = "Gives your partner +" + str(self.value) + " pleasure."
-        if name == "Gentle penetration":
-            self.value = 4
+            self.description = "Gives your partner +" + str(self.value) + " pleasure. Double if you use an oral implenent."
+            self.skill = "oral"
+        if name == "Gentle hip moves":
+            self.value = 5
             self.directions = ["caress", "bliss"]
-            self.description = "Gives +" + str(self.value) + " pleasure to you and your partner."
-        if name == "Forceful penetration":
+            self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Double if penetration achived by you."
+        if name == "Forceful hip moves":
             self.value = 6
             self.directions = ["torture", "bliss"]
-            self.description = "Gives +" + str(self.value) + " pleasure to you and pain to your partner."
+            self.description = "Gives +" + str(self.value) + " pleasure to you and pain to your partner. Double if penetration achived by you."
         if name == "Sloppy sounds":
-            self.value = 3
+            self.value = 2
             self.directions = ["bliss", "disgrace"]
-            self.description = "Gives you +" + str(self.value) + " pleasure and shame."
+            self.description = "Gives you +" + str(self.value) + " pleasure and shame. Double if you use a hole implenent."
         if name == "Jerk":
-            self.value = 5
+            self.value = 4
             self.directions = ["bliss", "disgrace"]
-            self.description = "Gives you +" + str(self.value) + " pleasure and shame."
+            self.description = "Gives you +" + str(self.value) + " pleasure and shame. Double if you use sensitive implement."
         if name == "Bite":
             self.value = 5
             self.directions = ["torture"]
@@ -80,46 +86,52 @@ class Card(object):
             self.directions = ["caress", "bliss"]
             self.complimentary = "From behind"
             self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Doubled if partner have 'From behind' active."
+            self.skill = "penetration"
         if name == "From behind":
             self.value = 2
             self.directions = ["caress", "bliss"]
             self.complimentary = "Doggy-style"
             self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Doubled if partner have 'Doggy-style' active."
+            self.skill = "penetration"
         if name == "On top":
             self.value = 4
             self.directions = ["caress", "bliss"]
             self.complimentary = "Under"
             self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Doubled if partner have 'Under' active."
+            self.skill = "penetration"
         if name == "Under":
             self.value = 2
             self.directions = ["caress", "bliss"]
             self.complimentary = "On top"
             self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Doubled if partner have 'On top' active."
+            self.skill = "penetration"
         if name == "Side pose":
             self.value = 3
             self.directions = ["caress", "bliss"]
             self.complimentary = "Side pose"
             self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Doubled if partner also have 'Side pose' active."
+            self.skill = "penetration"
         if name == "Sixty-nine":
             self.value = 4
             self.directions = ["caress", "bliss"]
             self.complimentary = "Sixty-nine"
             self.description = "Gives +" + str(self.value) + " pleasure to you and your partner. Doubled if partner also have 'Side pose' active."
+            self.skill = "oral"
 
         if name == "Age-play":
             self.special = "fetish"
             self.value = 2
-            self.directions = ["disgrace", "shame"]
+            self.directions = ["disgrace", "disgrace"]
             self.description = "Gives you and your partner +" + str(self.value) + " shame. You gain new action from your inactive potential."
         if name == "Foot worship":
             self.special = "fetish"
             self.value = 4
-            self.directions = ["caress", "shame"]
+            self.directions = ["caress", "disgrace"]
             self.description = "Gives your partner +" + str(self.value) + " pleasure and equal shame to you. You gain new action from your inactive potential."
         if name == "Golden shower":
             self.special = "fetish"
             self.value = 6
-            self.directions = ["disgrace"]
+            self.directions = ["abuse"]
             self.description = "Gives your partner +" + str(self.value) + " shame. You gain new action from your inactive potential."
 
         if name == "Command":
@@ -133,7 +145,8 @@ class Card(object):
             self.description = "If your partners pleasure is more than shame and pain, disregard one of your partners actions with persistent effect, and also one of your own."
         if name == "Cool down":
             self.special = "cooldown"
-            self.description = "If you have no shame or pain, disregard one of your actions with persistent effect."
+            self.description = "If you have no shame or pain, disregard one of your actions with persistent special effect or modifier."
+
         if name == "Frenzy":
             self.special = "frenzy"
             self.description = "Make two random actions from your inactive potential."
@@ -186,6 +199,7 @@ class Card(object):
         if name == "Cruelty":
             self.modifier = "cruelty"
             self.description = "At the end of round, your partners shame points are doubled."
+
         if name == "Cumshot":
             self.modifier = "cumshot"
             self.description = "At the end of round, if you have an erected dick gain an extasy point even if your pleasure is less than pleasure threshold."
@@ -201,10 +215,40 @@ class Card(object):
 
     def played_on(self, target, actor):
         if self.directions:
-            self.value_implementation(target, actor)
+            self.value_implementation(target, actor)    # ADD CARD VALUE TO RESPECTIVE COUNTERS
             for card in target.table:
-                if card.name == self.complimentary:
+                if card.name == self.complimentary:     # COMPLIMENTARITY
                     self.value_implementation(target, actor)
+            for direction in self.directions:
+                if self.skill == actor.active_implement.skill:
+                    self.value_implementation(target, actor)
+                if direction == "caress":
+                    if target.active_implement.sensitive:   # SENSITIVE IMPLEMENT CONSIDERATION
+                        target.pleasure += self.value
+                    if target.active_implement.hole and actor.active_implement.penetrator and self.skill == "penetration": # RESPECTIVE SIZES OF HOLE AND PENETRATOR, GAIN PAIN OR PLEASURE
+                        if actor.active_implement.size == "L":
+                            target.pleasure += 3
+                    if target.active_implement.rough and actor.active_implement.penetrator and self.skill == "penetration": # ROUGH PENETRATION PAIN
+                        target.pain += self.value
+                if direction == "bliss":
+                    if actor.active_implement.sensitive:    # SENSITIVE IMPLEMENT CONSIDERATION
+                        actor.pleasure += self.value
+                    if target.active_implement.hole and actor.active_implement.penetrator and self.skill == "penetration":
+                        if actor.active_implement.size == "L":
+                            actor.pleasure += 3
+                        if target.active_implement.size == "Slimy":
+                            actor.pleasure += 3
+                    if target.active_implement.size == "B":  # BOOBS SIZE PLEASURE EFFECT
+                        actor.pleasure += 2
+                # if direction == "abuse":
+                # if direction == "disgrace":
+                if direction == "torture":
+                    if target.active_implement.sensitive:   # SENSITIVE IMPLEMENT CONSIDERATION
+                        target.pain += self.value
+                if direction == "suffering":
+                    if actor.active_implement.sensitive:   # SENSITIVE IMPLEMENT CONSIDERATION
+                        actor.pain += self.value
+
         if self.modifier:
             target.modifiers.append(self.modifier)
         special_effect = getattr(self, self.special)

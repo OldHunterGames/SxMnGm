@@ -77,17 +77,34 @@ screen choice(items):
             spacing 2
 
             for caption, action, chosen in items:
-
-                if action:
-
-                    button:
-                        action action
-                        style "menu_choice_button"
-
-                        text caption style "menu_choice"
-
+                # КАСТОМНОЕ МЕНЮ
+                if hasattr(store, "game") and caption in game.menues:
+                    $ pass
                 else:
-                    text caption style "menu_caption"
+                    if action:
+    
+                        button:
+                            action action
+                            style "menu_choice_button"
+    
+                            text caption style "menu_choice"
+    
+                    else:
+                        text caption style "menu_caption"
+                    
+            # КАСТОМНОЕ МЕНЮ
+            if hasattr(store, "game") and items[0][0] in game.menues:
+                for cap, act in game.menues[items[0][0]]:
+                    if act:
+    
+                        button:
+                            action act
+                            style "menu_choice_button"
+    
+                            text cap style "menu_choice"
+    
+                    else:
+                        text cap style "menu_caption"
 
 init -2:
     $ config.narrator_menu = True
@@ -183,7 +200,18 @@ screen main_menu():
     # The background of the main menu.
     window:
         style "mm_root"
-
+        
+    fixed:
+        text "{color=#000}OldHuntsman (ↄ){/color}" xalign 0.0 yalign 1.0
+    
+    frame:        
+        style_group "title"
+        xalign .5
+        yalign .1
+        has vbox
+        text "{size=+10}Sex Mini Game{/size}"
+        text "(prototype 0.1)"
+        
     # The main menu buttons.
     frame:
         style_group "mm"
@@ -577,7 +605,7 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         # We however are going to change that default to a vbox. VBox plainly means that everything in the container will be placed vertically, automatically by Ren'Py! like so:
         has vbox spacing 10 # spacing tells vbox to put 10 pixels between it's children
         
-        text "Pleasure: {}".format(ai.pleasure) 
+        text "Pleasure: {0} ({1})".format(ai.pleasure, game.players[1].get_pleasure_threshold()) 
         text "Pain: {}".format(ai.pain) 
         text "Shame: {}".format(ai.shame)         
         text "\nExtasy: {}".format(ai.extasy_tokens)         
@@ -616,7 +644,7 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
         xysize (200, 220) # A size of this frame in pixels.
         align (0.05, 0.95) # Positioning on the screen.       
         has vbox spacing 10
-        text "Pleasure: {}".format(player.pleasure) 
+        text "Pleasure: {0} ({1})".format(player.pleasure, game.players[0].get_pleasure_threshold())
         text "Pain: {}".format(player.pain) 
         text "Shame: {}".format(player.shame)     
         text "\nExtasy: {}".format(player.extasy_tokens)         
@@ -638,7 +666,7 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
                     action SetVariable("table_status", "your_hand")
                 textbutton "Deck":
                     action SetVariable("table_status", "your_deck")
-                textbutton "Discard":
+                textbutton "Discard  pile":
                     action SetVariable("table_status", "your_discard")
             vbox:
                 xalign 0.5       
@@ -653,7 +681,7 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
                     action SetVariable("table_status", "ai_hand")
                 textbutton "Deck":
                     action SetVariable("table_status", "ai_deck")
-                textbutton "Discard":
+                textbutton "Discard pile":
                     action SetVariable("table_status", "ai_discard")
                 
     frame: # TABLE MENU
@@ -672,23 +700,50 @@ screen play_cards():    # MAIN SCREEN OF MINI-GAME WITH ALL THE STATICSTICS
             hbox:
                 box_wrap True
                 for card in game.players[0].deck:
-                    text "[card.name], "
+                    textbutton card.name:
+                        action Return(["show card", card])
         elif table_status == "your_discard":
             text "YOUR USED ACTIONS\n"
             hbox:
                 box_wrap True
                 for card in game.players[0].discard_pile:
-                    text "[card.name], "
+                    textbutton card.name:
+                        action Return(["show card", card])
         elif table_status == "played_on_table":
             text "ACTIONS MADE THIS ROUND\n"
             hbox:
                 box_wrap True
-                text "[player.name]\n"
+                text "[player.name]: "
                 for card in game.players[0].table:
-                    text "[card.name], "
-                text "\n[ai.name]\n"
-                for card in game.players[0].table:
-                    text "[card.name], "    
+                   textbutton card.name:
+                        action Return(["show card", card])
+            hbox:
+                box_wrap True
+                text "[ai.name]: "
+                for card in game.players[1].table:
+                    textbutton card.name:
+                        action Return(["show card", card])    
+        elif table_status == "ai_hand":
+            text "PARTNERs AVIABLE ACTIONS\n"
+            hbox:
+                box_wrap True
+                for card in game.players[1].hand:
+                    textbutton card.name:
+                        action Return(["show card", card,]) # action is whatever we want this button to do. Return returns a list with card and ai to the loop.
+        elif table_status == "ai_deck":
+            text "ACTIONS IN PARTNERs DECK\n"
+            hbox:
+                box_wrap True
+                for card in game.players[1].deck:
+                    textbutton card.name:
+                        action Return(["show card", card])
+        elif table_status == "ai_discard":
+            text "PARTNER USED ACTIONS\n"
+            hbox:
+                box_wrap True
+                for card in game.players[1].discard_pile:
+                    textbutton card.name:
+                        action Return(["show card", card])                        
         else:
             text "ERROR. WRONG table_status"            
 
@@ -723,16 +778,11 @@ screen new_round():             # OPENS WHEN ROUND ENDS
     frame: 
         align (0.5, 0.5)                 
         has vbox spacing 10
-        text "End of round"
-        text "One who have 2 or more extasy points (while opponent has less) is LOSER."
+        text "End of round [game.round]" 
         text "Your extasy: [player.extasy_tokens]"
         text "Oponent extasy: [ai.extasy_tokens]"
         hbox:
             align (0.5, 0.9)
             box_wrap True
             textbutton "Next round":
-                action Return("continue")
-            textbutton "End game":
-                action Return("end")  
-
-                
+                action Return("continue")                
