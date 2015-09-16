@@ -46,7 +46,7 @@ label start:
         game.mode = smg_mode
         table_status = "your_hand"
     "Let's match begin!"
-    call new_round from _call_new_round   
+    call new_round   
     
     return
     
@@ -58,25 +58,25 @@ label new_round:
 label nrc:            
     $ game.round += 1
     show screen play_cards
-    call new_turn from _call_new_turn
+    call new_turn
     return
     
 label new_turn:
     $ game.turn += 1    
-    call player_turn from _call_player_turn
+    call player_turn
     return
 
 label ai_turn:
     $ location_to_call = game.ai_move()
-    call expression location_to_call from _call_expression      
+    call expression location_to_call      
     return
     
 label player_turn:
     if game.players[0].passed:
-        call ai_turn from _call_ai_turn
+        call ai_turn
     else:
         $ location_to_call = game.render_input(ui.interact())  
-        call expression location_to_call from _call_expression_1   
+        call expression location_to_call   
     return
 
 # This label calls pop_up screen, and waits for input to it    
@@ -86,7 +86,7 @@ label pop_up:
     $ location_to_call = game.render_input(ui.interact())   
     hide screen pop_up
     show screen play_cards
-    call expression location_to_call from _call_expression_2     
+    call expression location_to_call     
     return
 
 # This label calls screen to play a card from player hand        
@@ -98,9 +98,9 @@ label show_card:
         $ game.players[0].play_card(game.output, game.players[1])
         hide screen show_card
         show screen play_cards
-        call ai_turn from _call_ai_turn_1
+        call ai_turn
     else:
-        call player_turn from _call_player_turn_1
+        call player_turn
     return
     
 label round_end:
@@ -113,7 +113,7 @@ label round_end:
     if game.end_is_near():
         hide screen round_end  
         jump session_end
-    call new_round from _call_new_round_1
+    call new_round
     return
     
 label session_end:
